@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+#clear COBOL file
+: > dumb.cbl
+
+#Add header
+
+header="
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. Dumb.
+       AUTHOR. Scimitaria.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 Num  PIC 9(999).
+
+       PROCEDURE DIVISION
+           EVALUATE Num
+"
+
+footer="
+           END-EVALUATE
+       STOP RUN.
+
+"
