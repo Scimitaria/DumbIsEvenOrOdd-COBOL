@@ -16,8 +16,7 @@ function isEven {
 }
 
 #Add header
-header="
-       IDENTIFICATION DIVISION.
+header="       IDENTIFICATION DIVISION.
        PROGRAM-ID. Dumb.
        AUTHOR. Scimitaria.
 
@@ -40,8 +39,7 @@ done
 
 #add footer
 footer="           END-EVALUATE
-       STOP RUN.
-"
+       STOP RUN."
 echo $footer >> dumb.cbl
 
 #compile code

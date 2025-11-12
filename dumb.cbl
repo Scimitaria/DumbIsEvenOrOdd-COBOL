@@ -1,4 +1,3 @@
-
        IDENTIFICATION DIVISION.
        PROGRAM-ID. Dumb.
        AUTHOR. Scimitaria.
@@ -1015,4 +1014,3 @@
              WHEN 1000 DISPLAY "1000 is even"
            END-EVALUATE
        STOP RUN.
-
