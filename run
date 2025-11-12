@@ -1,0 +1,19 @@
+#compile generator
+cobc -x generator.cbl -o generator
+
+#run generator
+./generator
+
+#remove exe
+rm generator
+
+#compile code
+echo "Generation complete. Compiling..."
+cobc -x dumb.cbl -o dumb_exe
+
+#run code
+echo "Compiled. Running..."
+./dumb_exe $num
+
+#remove exe
+rm dumb_exe

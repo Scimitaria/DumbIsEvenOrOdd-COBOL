@@ -1,3 +1,4 @@
 *.exe
 .DS_Store
+#ignore dumb.cbl so I don't accidentally push a huge file
 dumb.cbl
