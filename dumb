@@ -23,10 +23,10 @@ header="
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 Arg  PIC X(999).
-       01 Num  PIC 9(999).
+       01 Arg  PIC X(38).
+       01 Num  PIC 9(38).
 
-       PROCEDURE DIVISION
+       PROCEDURE DIVISION.
            ACCEPT Arg FROM COMMAND-LINE.
            UNSTRING Arg DELIMITED BY SPACE INTO Num.
            EVALUATE Num"
@@ -43,3 +43,12 @@ footer="           END-EVALUATE
        STOP RUN.
 "
 echo $footer >> dumb.cbl
+
+#compile code
+cobc -x dumb.cbl -o dumb_exe
+
+#run code
+./dumb_exe $num
+
+#remove exe
+rm dumb_exe
