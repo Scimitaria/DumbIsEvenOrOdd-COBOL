@@ -3,8 +3,19 @@
 #clear COBOL file
 : > dumb.cbl
 
-#Add header
+#get number
+num=${1:-1000}
 
+#actually do isEven
+function isEven {
+    if (( $1 % 2 == 0 )); then
+        echo "even"
+    else
+        echo "odd"
+    fi
+}
+
+#Add header
 header="
        IDENTIFICATION DIVISION.
        PROGRAM-ID. Dumb.
@@ -12,14 +23,23 @@ header="
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
+       01 Arg  PIC X(999).
        01 Num  PIC 9(999).
 
        PROCEDURE DIVISION
-           EVALUATE Num
-"
+           ACCEPT Arg FROM COMMAND-LINE.
+           UNSTRING Arg DELIMITED BY SPACE INTO Num.
+           EVALUATE Num"
+echo $header >> dumb.cbl
 
-footer="
-           END-EVALUATE
+#autogenerate code
+for i in $(seq 0 $num); do
+  ie=$(isEven $i)
+  echo "             WHEN $i DISPLAY \"$i is $ie\"" >> dumb.cbl
+done
+
+#add footer
+footer="           END-EVALUATE
        STOP RUN.
-
 "
+echo $footer >> dumb.cbl
