@@ -15,7 +15,8 @@
        WORKING-STORAGE SECTION.
        01 Arg    PIC X(38).
        01 num    PIC 9(38).
-       01 idx    PIC 9(38) VALUE 0.
+       01 idx    PIC 9(8).
+       01 idx-text PIC Z(8).
 
        PROCEDURE DIVISION.
       *Clear file
@@ -56,8 +57,16 @@
            WRITE lineText.
 
       *Generate isEvenOrOdd
-           PERFORM VARYING idx FROM 0 BY 1 UNTIL idx > num
-            MOVE "             WHEN 0 DISPLAY ""0 is odd""" TO lineText
+           PERFORM VARYING idx FROM 1 BY 1 UNTIL idx > num
+             MOVE idx TO idx-text
+      *      MOVE FUNCTION TRIM(WS-ORIGINAL-STRING) TO idx
+             STRING
+               "             WHEN " DELIMITED BY SIZE
+               idx-text             DELIMITED BY SIZE
+               " DISPLAY """        DELIMITED BY SIZE
+               idx-text             DELIMITED BY SIZE
+               " is odd"""          DELIMITED BY SIZE
+               INTO lineText
             WRITE lineText
            END-PERFORM.
 
