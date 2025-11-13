@@ -11,12 +11,15 @@
        DATA DIVISION.
        FILE SECTION.
        FD dumb.
-       01 lineText PIC X(52).
+       01 lineText PIC X(80).
        WORKING-STORAGE SECTION.
-       01 Arg    PIC X(38).
-       01 num    PIC 9(38).
+       01 Arg    PIC X(8).
+       01 num    PIC 9(8).
        01 idx    PIC 9(8).
        01 idx-text PIC Z(8).
+       01 isEven PIC X(4)  VALUE "odd".
+       01 toggle PIC S9    VALUE 1.
+       01 minus-one PIC S9 VALUE -1.
 
        PROCEDURE DIVISION.
       *Clear file
@@ -59,13 +62,23 @@
       *Generate isEvenOrOdd
            PERFORM VARYING idx FROM 1 BY 1 UNTIL idx > num
              MOVE idx TO idx-text
-      *      MOVE FUNCTION TRIM(WS-ORIGINAL-STRING) TO idx
+
+             IF toggle = 1
+               MOVE "odd" TO isEven
+             ELSE
+               MOVE "even" TO isEven
+             END-IF
+
+             MULTIPLY toggle BY minus-one GIVING toggle
+
              STRING
                "             WHEN " DELIMITED BY SIZE
                idx-text             DELIMITED BY SIZE
                " DISPLAY """        DELIMITED BY SIZE
                idx-text             DELIMITED BY SIZE
-               " is odd"""          DELIMITED BY SIZE
+               " is "               DELIMITED BY SIZE
+               isEven               DELIMITED BY SIZE
+               """"                 DELIMITED BY SIZE
                INTO lineText
             WRITE lineText
            END-PERFORM.
