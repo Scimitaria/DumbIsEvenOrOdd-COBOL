@@ -11,12 +11,12 @@
        DATA DIVISION.
        FILE SECTION.
        FD dumb.
-       01 lineText PIC X(80).
+       01 lineText PIC X(180).
        WORKING-STORAGE SECTION.
-       01 Arg    PIC X(8).
-       01 num    PIC 9(8).
-       01 idx    PIC 9(8).
-       01 idx-text PIC Z(8).
+       01 Arg    PIC X(18).
+       01 num    PIC 9(18).
+       01 idx    PIC 9(18).
+       01 idx-text PIC Z(18).
        01 isEven PIC X(4)  VALUE "odd".
        01 toggle PIC S9    VALUE 1.
        01 minus-one PIC S9 VALUE -1.
@@ -61,6 +61,7 @@
 
       *Generate isEvenOrOdd
            PERFORM VARYING idx FROM 1 BY 1 UNTIL idx > num
+             *>convert index to string
              MOVE idx TO idx-text
 
              IF toggle = 1
@@ -73,9 +74,9 @@
 
              STRING
                "             WHEN " DELIMITED BY SIZE
-               idx-text             DELIMITED BY SIZE
+               FUNCTION TRIM(idx-text) DELIMITED BY SPACE
                " DISPLAY """        DELIMITED BY SIZE
-               idx-text             DELIMITED BY SIZE
+               FUNCTION TRIM(idx-text) DELIMITED BY SPACE
                " is "               DELIMITED BY SIZE
                isEven               DELIMITED BY SIZE
                """"                 DELIMITED BY SIZE
