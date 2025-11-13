@@ -2,7 +2,8 @@
 cobc -x generator.cbl -o generator
 
 #run generator
-./generator
+num=${1:-1000}
+./generator $num
 
 #remove exe
 rm generator

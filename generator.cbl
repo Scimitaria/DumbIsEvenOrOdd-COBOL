@@ -13,7 +13,9 @@
        FD dumb.
        01 lineText PIC X(52).
        WORKING-STORAGE SECTION.
+       01 Arg    PIC X(38).
        01 num    PIC 9(38).
+       01 idx    PIC 9(38) VALUE 0.
 
        PROCEDURE DIVISION.
       *Clear file
@@ -21,6 +23,8 @@
            CLOSE dumb.     
       *Prep file for appending
            OPEN EXTEND dumb.
+           ACCEPT Arg FROM COMMAND-LINE.
+           UNSTRING Arg DELIMITED BY SPACE INTO Num.
 
       *Append header
            MOVE "       IDENTIFICATION DIVISION." TO lineText.
@@ -51,11 +55,18 @@
            MOVE "           EVALUATE Num" TO lineText.
            WRITE lineText.
 
+      *Generate isEvenOrOdd
+           PERFORM VARYING idx FROM 0 BY 1 UNTIL idx > num
+            MOVE "             WHEN 0 DISPLAY ""0 is odd""" TO lineText
+            WRITE lineText
+           END-PERFORM.
+
       *Append footer
            MOVE "           END-EVALUATE" TO lineText.
            WRITE lineText.
            MOVE "       STOP RUN." TO lineText.
            WRITE lineText.
 
+      *Close off
            CLOSE dumb.
            STOP RUN.
