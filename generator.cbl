@@ -17,9 +17,8 @@
        01 num    PIC 9(18).
        01 idx    PIC 9(18).
        01 idx-text PIC Z(18).
-       01 isEven PIC X(4)  VALUE "odd".
+       01 isEven PIC X(5)  VALUE "odd".
        01 toggle PIC S9    VALUE 1.
-       01 minus-one PIC S9 VALUE -1.
 
        PROCEDURE DIVISION.
       *Clear file
@@ -65,12 +64,13 @@
              MOVE idx TO idx-text
 
              IF toggle = 1
-               MOVE " odd" TO isEven
+               MOVE " odd'" TO isEven
+               MOVE isEven(2:4) TO isEven
              ELSE
-               MOVE "even" TO isEven
+               MOVE "even'" TO isEven
              END-IF
 
-             MULTIPLY toggle BY minus-one GIVING toggle
+             MULTIPLY toggle BY -1 GIVING toggle
 
              STRING
                "             WHEN " DELIMITED BY SIZE
@@ -79,7 +79,6 @@
                FUNCTION TRIM(idx-text) DELIMITED BY SPACE
                " is "               DELIMITED BY SIZE
                isEven               DELIMITED BY SIZE
-               "'"                  DELIMITED BY SIZE
                INTO lineText
             WRITE lineText
            END-PERFORM.
