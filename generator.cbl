@@ -65,7 +65,7 @@
              MOVE idx TO idx-text
 
              IF toggle = 1
-               MOVE "odd" TO isEven
+               MOVE " odd" TO isEven
              ELSE
                MOVE "even" TO isEven
              END-IF
@@ -75,11 +75,11 @@
              STRING
                "             WHEN " DELIMITED BY SIZE
                FUNCTION TRIM(idx-text) DELIMITED BY SPACE
-               " DISPLAY """        DELIMITED BY SIZE
+               " DISPLAY '"         DELIMITED BY SIZE
                FUNCTION TRIM(idx-text) DELIMITED BY SPACE
                " is "               DELIMITED BY SIZE
                isEven               DELIMITED BY SIZE
-               """"                 DELIMITED BY SIZE
+               "'"                  DELIMITED BY SIZE
                INTO lineText
             WRITE lineText
            END-PERFORM.
@@ -93,3 +93,4 @@
       *Close off
            CLOSE dumb.
            STOP RUN.
+           
