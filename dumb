@@ -22,8 +22,8 @@ header="       IDENTIFICATION DIVISION.
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 Arg  PIC X(38).
-       01 Num  PIC 9(38).
+       01 Arg  PIC X(18).
+       01 Num  PIC 9(18).
 
        PROCEDURE DIVISION.
            ACCEPT Arg FROM COMMAND-LINE.
@@ -34,7 +34,7 @@ echo $header >> dumb.cbl
 #autogenerate code
 for i in $(seq 0 $num); do
   ie=$(isEven $i)
-  echo "             WHEN $i DISPLAY \"$i is $ie\"" >> dumb.cbl
+  echo "            WHEN $i DISPLAY \"$i is $ie\"" >> dumb.cbl
 done
 
 #add footer

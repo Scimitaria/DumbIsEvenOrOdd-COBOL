@@ -11,13 +11,13 @@
        DATA DIVISION.
        FILE SECTION.
        FD dumb.
-       01 lineText PIC X(180).
+       01 lineText PIC X(60).
        WORKING-STORAGE SECTION.
        01 Arg    PIC X(18).
        01 num    PIC 9(18).
        01 idx    PIC 9(18).
        01 idx-text PIC Z(18).
-       01 isEven PIC X(5)  VALUE "odd".
+       01 isEven PIC X(5).
        01 toggle PIC S9    VALUE 1.
 
        PROCEDURE DIVISION.
@@ -73,7 +73,7 @@
              MULTIPLY toggle BY -1 GIVING toggle
 
              STRING
-               "             WHEN " DELIMITED BY SIZE
+               "            WHEN "  DELIMITED BY SIZE
                FUNCTION TRIM(idx-text) DELIMITED BY SPACE
                " DISPLAY '"         DELIMITED BY SIZE
                FUNCTION TRIM(idx-text) DELIMITED BY SPACE
